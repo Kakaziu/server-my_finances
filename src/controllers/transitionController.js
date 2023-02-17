@@ -7,7 +7,8 @@ exports.index = async (req, res) =>{
 
         return res.json(userTranstions)
     }catch(e){
-        return res.status(400).json({ errors: ['Não foi possível achar os usuários'] })
+        console.log(e)
+        return res.status(400).json({ errors: ['Não foi possível achar as transições'] })
     }
 }
 
@@ -34,9 +35,9 @@ exports.delete = async (req, res) =>{
     const { id } = req.params
 
     try{
-        const transitionDeleted = await Transition.delete(id)
+        await Transition.delete(id)
 
-        return res.json(transitionDeleted)
+        return res.json({ msg: 'Transição deletada.' })
     }catch(e){
         return res.status(400).json({ errors: ['Não foi possível apagar a transição.'] })
     }
